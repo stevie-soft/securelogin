@@ -1,6 +1,9 @@
 # Sensitive
 password.txt
 
+# Editor / IDE
+.vscode
+
 # Package management
 /vendor/
 node_modules/
