@@ -14,7 +14,7 @@ class EnvVarManager {
     $lines = file($filePath, FILE_IGNORE_NEW_LINES);
     
     if (!$lines) {
-      die("Could not load env file at '" + $filePath + "'");
+      die("Could not load env file at '{$filePath}'");
     }
 
     foreach ($lines as $line) {
@@ -129,7 +129,7 @@ class CredentialsManager {
     $passwordFileLines = file($this->passwordsFilePath, FILE_IGNORE_NEW_LINES);
 
     if (!$passwordFileLines) {
-      die("Could not load passwords file at '" . $this->passwordsFilePath . "'");
+      die("Could not load passwords file at '{$this->passwordsFilePath}'");
     }
 
     foreach ($passwordFileLines as $entry) {
