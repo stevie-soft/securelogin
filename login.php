@@ -186,6 +186,10 @@ class DatabaseManager {
   }
 
   public function query(string $statementTemplate, string $paramTypes, string ...$params): array {
+    if (!$this->connection) {
+      $this->connect();
+    }
+
     $statement = $this->connection->prepare($statementTemplate);
     $statement->bind_param($paramTypes, $params);
     $statement->execute();
