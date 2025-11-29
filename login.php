@@ -70,8 +70,8 @@ class Config {
 }
 
 class LoginRequest {
-  public string $username;
-  public string $password;
+  public string | null $username;
+  public string | null $password;
 
   public function __construct(array $data) {
     $this->username = $data["username"];
