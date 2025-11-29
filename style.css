@@ -1,0 +1,97 @@
+:root {
+  --bg-color: #1f2022;
+  --text-color: #e0e4eb;
+  --surface-color: #3d4047;
+  --font-family: "Advent Pro", sans-serif;
+  --font-size: 2rem;
+  --radius: 15px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+body main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px;
+  background-color: var(--surface-color);
+  border-radius: var(--radius);
+}
+
+form h1 {
+  margin: 0;
+}
+
+form h2 {
+  margin: 0;
+}
+
+form label {
+  align-self: flex-start;
+}
+
+form input {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  border-radius: var(--radius);
+  padding: 15px;
+  transition: 0.1s all ease-in-out;
+}
+
+form input:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--text-color);
+}
+
+form .spacing {
+  height: 15px;
+}
+
+form .divider {
+  width: 100%;
+  border-color: var(--bg-color);
+  border-width: 1px;
+  border-style: solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+form button[class="primary"] {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--font-size);
+  height: auto;
+  border-radius: 35px;
+  padding: 10px;
+  transition: 0.2s all ease-in-out;
+}
+
+form button[class="primary"]:hover,
+form button[class="primary"]:focus {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
