@@ -249,6 +249,6 @@ $db = new AdatokDatabaseManager(
   databaseName: $config->getDatabaseName()
 );
 
-$user = $db->findUserByUsername($request->$username);
+$user = $db->findUserByUsername($request->username);
 echo "'{$user->username}' kedvenc színe: {$user->favoriteColor}";
 ?>
