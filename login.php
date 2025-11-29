@@ -1,5 +1,65 @@
 <?php
 
+class EnvVarManager {
+
+  public function set(string $key, string $value) {
+    $_ENV[$key] = $value;
+  }
+
+  public function get(string $key): string {
+    return $_ENV[$key];
+  }
+
+  public function loadDotEnv(string $filePath = ".env") {
+    $lines = file($filePath);
+    
+    if (!$lines) {
+      die("Could not load env file at '" + $filePath + "'");
+    }
+
+    foreach ($lines as $line) {
+      [$key, $value] = explode('=', $line, 2);
+      $key = trim($key);
+      $value = trim($value);
+
+      $this->set($key, $value);
+    }
+  }
+
+}
+
+class Config {
+  private EnvVarManager $envVarManager;
+
+  public function __construct() {
+    $this->envVarManager = new EnvVarManager();
+  }
+
+  public function loadDotEnv() {
+    $this->envVarManager->loadDotEnv();
+  }
+
+  public function getPasswordsFilePath(): string {
+    return "./password.txt";
+  }
+
+  public function getDecryptionKey(): array {
+    $keyAsString = $this->envVarManager->get("DECRYPTION_KEY");
+
+    return array_map(
+      callback: 'intval', 
+      array: explode(',', $keyAsString)
+    );
+  }
+
+  public function getDatabaseCredentials(): array {
+    $username = $this->envVarManager->get("DB_USERNAME");
+    $password = $this->envVarManager->get("DB_PASSWORD");
+
+    return [$username, $password];
+  }
+}
+
 class LoginRequest {
   public string $username;
   public string $password;
@@ -42,33 +102,18 @@ class CredentialsManager {
 
   private array $db;
 
-  public function __construct(string $passwordsFilePath, string $keyFilePath) {
+  public function __construct(string $passwordsFilePath, array $key) {
     $this->passwordsFilePath = $passwordsFilePath;
-    $this->keyFilePath = $keyFilePath;
-    $this->key = [];
+    $this->key = $key;
     $this->db = [];
   }
 
-  public function load() {
+  public function loadPasswords() {
     $passwordFileLines = file($this->passwordsFilePath);
 
     if (!$passwordFileLines) {
       die("Could not load passwords file at '" + $this->passwordsFilePath + "'");
     }
-
-    $keyFileLines = file($this->keyFilePath);
-
-    if (!$keyFileLines) {
-      die("Could not load key file at '" + $this->keyFilePath + "'");
-    }
-
-    $containsKey = count($keyFileLines) > 0;
-
-    if (!$containsKey) {
-      die("Could not find key in key file at '" + $this->keyFilePath + "'");
-    }
-
-    $this->key = array_map('intval', explode(',', $keyFileLines[0]));
 
     foreach ($passwordFileLines as $entry) {
       $credentials = new Credentials($entry);
@@ -86,15 +131,17 @@ class CredentialsManager {
   }
 }
 
-$PASSWORDS_FILE_PATH = "./password.txt";
-$KEY_FILE_PATH = "./key.txt";
-$
-
 $request = new LoginRequest($_POST);
 $request->validate();
 
-$credentialsManager = new CredentialsManager($PASSWORDS_FILE_PATH , $KEY_FILE_PATH);
-$credentialsManager->load();
+$config = new Config();
+$config->loadDotEnv();
+
+$credentialsManager = new CredentialsManager(
+  passwordsFilePath: $config->getPasswordsFilePath(), 
+  key: $config->getDecryptionKey()
+);
+$credentialsManager->loadPasswords();
 
 $validUser = $credentialsManager->userExists($request->username);
 if (!$validUser) {
