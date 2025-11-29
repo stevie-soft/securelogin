@@ -52,11 +52,20 @@ class Config {
     );
   }
 
-  public function getDatabaseCredentials(): array {
-    $username = $this->envVarManager->get("DB_USERNAME");
-    $password = $this->envVarManager->get("DB_PASSWORD");
+  public function getDatabaseHost(): string {
+    return "localhost";
+  }
 
-    return [$username, $password];
+  public function getDatabaseUsername(): string {
+    return $this->envVarManager->get("DB_USERNAME");
+  }
+
+  public function getDatabasePassword(): string {
+    return $this->envVarManager->get("DB_PASSWORD");
+  }
+
+  public function getDatabaseName(): string {
+    return "xadatok";
   }
 }
 
@@ -148,6 +157,69 @@ class CredentialsManager {
   }
 }
 
+class DatabaseManager {
+  private string $host;
+  private string $username;
+  private string $password;
+  private string $databaseName;
+  private mysqli | null $connection;
+
+  public function __construct(string $host, string $username, string $password, string $databaseName) {
+    $this->host = $host;
+    $this->username = $username;
+    $this->password = $password;
+    $this->databaseName = $databaseName;
+    $this->connection = null;
+  }
+
+  public function connect() {
+    $this->connection = new mysqli(
+      hostname: $this->host, 
+      username: $this->username, 
+      password: $this->password, 
+      database: $this->databaseName
+    );
+
+    if ($this->connection->connect_error) {
+      die("Could not connect to MySQL database '{$this->databaseName}' at '{$this->host}' with user '{$this->username}'");
+    }
+  }
+
+  public function query(string $statementTemplate, string $paramTypes, string ...$params): array {
+    $statement = $this->connection->prepare($statementTemplate);
+    $statement->bind_param($paramTypes, $params);
+    $statement->execute();
+
+    $result = $statement->get_result();
+    return $result->fetch_all(MYSQL_ASSOC);
+  }
+}
+
+class User {
+  public int $id;
+  public string $username;
+  public string $favoriteColor;
+
+  public function __construct(array $values) {
+    $this->id = $values["Sor"];
+    $this->username = $values["Username"];
+    $this->favoriteColor = $values["Titkos"];
+  }
+}
+
+class AdatokDatabaseManager extends DatabaseManager {
+  public function findUserByUsername(string $username): User | null {
+    $statement = "SELECT * FROM tabla WHERE Username=?";
+    $results = $this->query($statement, "s", $username);
+
+    if (count($results) === 0) {
+      return null;
+    }
+
+    return new User($results[0]);
+  }
+}
+
 $request = new LoginRequest($_POST);
 $request->validate();
 
@@ -169,4 +241,14 @@ $validPassword = $credentialsManager->verifyPassword($request->username, $reques
 if (!$validPassword) {
   die("Invalid password!");
 }
+
+$db = new AdatokDatabaseManager(
+  host: $config->getDatabaseHost(),
+  username: $config->getDatabaseUsername(),
+  password: $config->getDatabasePassword(),
+  databaseName: $config->getDatabaseName()
+);
+
+$user = $db->findUserByUsername($request->$username);
+echo "'{$user->username}' kedvenc színe: {$user->favoriteColor}";
 ?>
