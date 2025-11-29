@@ -219,13 +219,8 @@ class User {
 class AdatokDatabaseManager extends DatabaseManager {
   public function findUserByUsername(string $username): User | null {
     $statement = "SELECT * FROM tabla WHERE Username=?";
-    $results = $this->query($statement, "s", $username);
-
-    if (count($results) === 0) {
-      return null;
-    }
-
-    return new User($results[0]);
+    $userValues = $this->query($statement, "s", $username);
+    return new User($userValues);
   }
 }
 
