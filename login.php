@@ -4,9 +4,9 @@ class LoginRequest {
   public string $username;
   public string $password;
 
-  public function __construct(string $username, string $password) {
-    $this->username = $username;
-    $this->password = $password;
+  public function __construct(array $data) {
+    $this->username = $data["username"];
+    $this->password = $data["password"];
   }
 
   public function isValid(): bool {
@@ -86,12 +86,11 @@ class CredentialsManager {
   }
 }
 
-$USERNAME_FIELD_KEY = "username";
-$PASSWORD_FIELD_KEY = "password";
 $PASSWORDS_FILE_PATH = "./password.txt";
 $KEY_FILE_PATH = "./key.txt";
+$
 
-$request = new LoginRequest($_POST[$USERNAME_FIELD_KEY], $_POST[$PASSWORD_FIELD_KEY]);
+$request = new LoginRequest($_POST);
 $request->validate();
 
 $credentialsManager = new CredentialsManager($PASSWORDS_FILE_PATH , $KEY_FILE_PATH);
