@@ -1,5 +1,9 @@
 <?php
 
+function debug($object) {
+  echo("<pre>" . print_r($object) . "</pre> <br />");
+}
+
 class EnvVarManager {
 
   public function set(string $key, string $value) {
@@ -191,11 +195,12 @@ class DatabaseManager {
     }
 
     $statement = $this->connection->prepare($statementTemplate);
-    $statement->bind_param($paramTypes, $params);
+    $statement->bind_param($paramTypes, ...$params);
     $statement->execute();
 
     $result = $statement->get_result();
-    return $result->fetch_all(MYSQL_ASSOC);
+
+    return $result->fetch_assoc();
   }
 }
 
