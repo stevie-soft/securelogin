@@ -1,5 +1,6 @@
 # Sensitive
 password.txt
+password_decrypted.txt
 
 # Editor / IDE
 .vscode
