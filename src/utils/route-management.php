@@ -25,7 +25,9 @@ class Router {
   }
 
   public static function redirect(string $targetPath) {
-    header("Location: /{$targetPath}");
+    $host = $_SERVER['SERVER_NAME'];
+    $url = "https://{$host}{$targetPath}";
+    header("Location: {$url}");
     exit();
   }
 }
