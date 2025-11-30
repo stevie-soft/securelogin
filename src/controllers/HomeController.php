@@ -6,6 +6,10 @@ class HomeController extends Controller {
   }
 
   public function automaticRedirect() {
-    
+    if ($_SESSION["authenticated"]) {
+      Router::redirect("/profile");
+    } else {
+      Router::redirect("/login");
+    }
   }
 }
