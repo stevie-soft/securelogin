@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Avoid rewriting the front controller itself
+RewriteCond %{REQUEST_URI} !^/index\.php
+
+# If not a file and not a directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite to index.php and pass the path
+RewriteRule ^(.*)$ index.php?path=$1 [NC,L,QSA]

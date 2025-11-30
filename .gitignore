@@ -2,6 +2,9 @@
 password.txt
 password_decrypted.txt
 
+# Local / Temporary
+*.backup.*
+
 # Editor / IDE
 .vscode
 
