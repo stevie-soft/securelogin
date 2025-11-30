@@ -1,26 +1,26 @@
 <?php
 /** Utilities */
-require_once "./utils/route-management.php";
-require_once "./utils/error-management.php";
-require_once "./utils/env-management.php";
-require_once "./utils/config-management.php";
-require_once "./utils/creds-management.php";
-require_once "./utils/db-management.php";
-require_once "./utils/view-management.php";
+require_once __DIR__ . "/utils/route-management.php";
+require_once __DIR__ . "/utils/error-management.php";
+require_once __DIR__ . "/utils/env-management.php";
+require_once __DIR__ . "/utils/config-management.php";
+require_once __DIR__ . "/utils/creds-management.php";
+require_once __DIR__ . "/utils/db-management.php";
+require_once __DIR__ . "/utils/view-management.php";
 
 /** Data Transfer Objects */
-require_once "./dtos/LoginRequestDto.php";
+require_once __DIR__ . "/dtos/LoginRequestDto.php";
 
 /** Domain Models */
-require_once "./models/User.php";
+require_once __DIR__ . "/models/User.php";
 
 /** Route Controllers */
-require_once "./controllers/Controller.php";
-require_once "./controllers/LoginController.php";
-require_once "./controllers/ProfileController.php";
+require_once __DIR__ . "/controllers/Controller.php";
+require_once __DIR__ . "/controllers/LoginController.php";
+require_once __DIR__ . "/controllers/ProfileController.php";
 
 /** Global Objects */
-require_once "./globals.php";
+require_once __DIR__ . "/globals.php";
 
 /** Session Management */
 session_start();
