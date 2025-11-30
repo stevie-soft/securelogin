@@ -7,7 +7,7 @@ class LoginController extends Controller {
     $this->handlers["POST"] = [$this, 'doLogin'];
   }
 
-  private function showLoginPage() {
+  protected function showLoginPage() {
     if ($_SESSION["authenticated"]) {
       Router::redirect("/profile");
     }
@@ -15,7 +15,7 @@ class LoginController extends Controller {
     View::render("login");
   }
 
-  private function doLogin() {
+  protected function doLogin() {
     global $config;
 
     $request = new LoginRequestDto($_POST);

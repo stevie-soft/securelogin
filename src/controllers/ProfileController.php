@@ -6,7 +6,7 @@ class ProfileController extends Controller {
     $this->handlers["GET"] = [$this, "showProfilePage"];
   }
 
-  private function showProfilePage() {
+  protected function showProfilePage() {
     if (!$_SESSION["authenticated"]) {
       Router::redirect("/login");
     }

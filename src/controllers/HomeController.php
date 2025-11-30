@@ -5,7 +5,7 @@ class HomeController extends Controller {
     $this->handlers["GET"] = [$this, 'automaticRedirect'];
   }
 
-  public function automaticRedirect() {
+  protected function automaticRedirect() {
     if ($_SESSION["authenticated"]) {
       Router::redirect("/profile");
     } else {
