@@ -7,7 +7,8 @@ class View {
   }
 
   private static function renderHtml(string $viewName, array $variables = []) {
-    $html = file_get_contents("../views/{$viewName}.html");
+    $filePath = __DIR__ . "/../views/{$viewName}.html";
+    $html = file_get_contents($filePath, true);
 
     foreach ($variables as $key => $value) {
       $placeholder = "%{$key}%";
