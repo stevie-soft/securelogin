@@ -16,6 +16,7 @@ require_once __DIR__ . "/models/User.php";
 
 /** Route Controllers */
 require_once __DIR__ . "/controllers/Controller.php";
+require_once __DIR__ . "/controllers/HomeController.php";
 require_once __DIR__ . "/controllers/LoginController.php";
 require_once __DIR__ . "/controllers/ProfileController.php";
 
