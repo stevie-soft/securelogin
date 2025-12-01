@@ -55,3 +55,12 @@ button[class="primary"]:focus {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
+.divider {
+  width: 100%;
+  border-color: var(--bg-color);
+  border-width: 1px;
+  border-style: solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

@@ -11,14 +11,17 @@
   </head>
   <body>
     <main>
-      <div>%USERNAME%</div>
-      <div id="favColorBox">%FAVORITE_COLOR%</div>
-      <div class="favFlower">
-        <img id="favFlowerImg"></img>
+      <div class="profile-card">
+        <div>%USERNAME%</div>
+        <div id="favColorBox">%FAVORITE_COLOR%</div>
+        <div class="favFlower">
+          <img id="favFlowerImg" />
+        </div>
+        <span class="divider"></span>
+        <form action="/logout" method="POST">
+          <button class="primary" type="submit">Kijelentkezés</button>
+        </form>
       </div>
-      <form action="/logout" method="POST">
-        <button class="primary" type="submit">Kijelentkezés</button>
-      </form>
     </main>
     <script src="/js/profile.js" type="module"></script>
   </body>

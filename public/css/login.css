@@ -42,12 +42,3 @@ form input:focus {
 form .spacing {
   height: 15px;
 }
-
-form .divider {
-  width: 100%;
-  border-color: var(--bg-color);
-  border-width: 1px;
-  border-style: solid;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
