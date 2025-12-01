@@ -25,6 +25,33 @@ body main {
   height: 100vh;
 }
 
+a {
+  color: var(--text-color);
+}
+
+a:visited {
+  color: var(--text-color);
+}
+
 .error {
   color: var(--error-color);
+}
+
+button[class="primary"] {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--font-size);
+  height: auto;
+  border-radius: 35px;
+  padding: 10px;
+  transition: 0.2s all ease-in-out;
+}
+
+button[class="primary"]:hover,
+button[class="primary"]:focus {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }

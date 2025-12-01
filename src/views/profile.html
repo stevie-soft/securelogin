@@ -7,13 +7,17 @@
     <title>System X</title>
     <link href="https://fonts.cdnfonts.com/css/advent-pro" rel="stylesheet" />
     <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
   </head>
   <body>
     <main>
       <div>%USERNAME%</div>
-      <div>%FAVORITE_COLOR%</div>
+      <div id="favColorBox">%FAVORITE_COLOR%</div>
+      <div class="favFlower">
+        <img id="favFlowerImg"></img>
+      </div>
       <form action="/logout" method="POST">
-        <button type="submit">Kijelentkezés</button>
+        <button class="primary" type="submit">Kijelentkezés</button>
       </form>
     </main>
     <script src="/js/profile.js" type="module"></script>

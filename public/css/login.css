@@ -16,6 +16,7 @@ form h1 {
 
 form h2 {
   margin: 0;
+  font-size: 1.5rem;
 }
 
 form label {
@@ -49,23 +50,4 @@ form .divider {
   border-style: solid;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-form button[class="primary"] {
-  width: 100%;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  line-height: var(--font-size);
-  height: auto;
-  border-radius: 35px;
-  padding: 10px;
-  transition: 0.2s all ease-in-out;
-}
-
-form button[class="primary"]:hover,
-form button[class="primary"]:focus {
-  transform: scale(1.1);
-  cursor: pointer;
-  background-color: var(--bg-color);
-  color: var(--text-color);
 }
