@@ -7,5 +7,7 @@ $router = new Router([
   '' => HomeController::class,
   'login' => LoginController::class,
   'profile' => ProfileController::class,
+  'logout' => LogoutController::class,
+  'broken' => ErrorController::class,
 ]);
 $router->handle($path, $method);

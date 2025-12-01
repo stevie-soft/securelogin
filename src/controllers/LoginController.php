@@ -22,32 +22,27 @@ class LoginController extends Controller {
     $request->validate();
 
     $credentials = new CredentialsManager(
-        $config->getPasswordsFilePath(),
+         __DIR__ . $config->getPasswordsFilePath(),
       $config->getDecryptionKey()
     );
+    $credentials->loadPasswords();
 
     $isUsernameValid = $credentials->userExists($request->username);
     if (!$isUsernameValid) {
-      fail(
-        ErrorCode::BAD_USERNAME_ERROR,
-        "Could not find user '{$request->username}' in the registered credentials. "
-      );
+      error_log("Could not find user '{$request->username}' in the registered credentials. ");
+      $this->fail(ErrorCode::BAD_USERNAME_ERROR);
     }
 
     $isPasswordValid = $credentials->verifyPassword($request->username, $request->password);
     if (!$isPasswordValid) {
-      fail(
-        ErrorCode::BAD_PASSWORD_ERROR,
-        "The registered and given passwords do not mach. ",
-      );
+      error_log("The registered and given passwords do not mach. ");
+      $this->fail(ErrorCode::BAD_PASSWORD_ERROR);
     }
 
     $user = User::findByUsername($request->username);
     if (!$user) {
-      fail(
-        ErrorCode::UNEXPECTED_ERROR,
-        "Could not find user '{$request->username}' in the database. "
-      );
+      error_log("Could not find user '{$request->username}' in the database. ");
+      $this->fail(ErrorCode::UNEXPECTED_ERROR);
     }
 
     $_SESSION["username"] = $user->username;

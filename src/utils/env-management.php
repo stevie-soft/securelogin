@@ -20,10 +20,8 @@ class EnvVarManager {
     $lines = file($filePath, FILE_IGNORE_NEW_LINES);
     
     if (!$lines) {
-      fail(
-        ErrorCode::UNEXPECTED_ERROR, 
-        "Could not load env file at '{$filePath}'. "
-      );
+      error_log("Could not load env file at '{$filePath}'. ");
+      fail(ErrorCode::READING_DOTENV_ERROR);
     }
 
     foreach ($lines as $line) {

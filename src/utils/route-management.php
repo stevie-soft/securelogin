@@ -20,7 +20,7 @@ class Router {
       exit();
     }
 
-    $controller = new $Controller();
+    $controller = new $Controller($path);
     $controller->handle($method);
   }
 

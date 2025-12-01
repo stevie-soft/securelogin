@@ -24,10 +24,8 @@ class DatabaseManager {
     );
 
     if ($this->connection->connect_error) {
-      fail(
-        ErrorCode::UNEXPECTED_ERROR,
-  "Could not connect to MySQL database '{$this->databaseName}' at '{$this->host}' with user '{$this->username}'"
-      );
+      error_log("Could not connect to MySQL database '{$this->databaseName}' at '{$this->host}' with user '{$this->username}'. ");
+      fail(ErrorCode::CONNECTING_TO_DATABASE_ERROR);
     }
   }
 

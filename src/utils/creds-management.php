@@ -49,10 +49,8 @@ class CredentialsManager {
     $passwordFileLines = file($this->passwordsFilePath, FILE_IGNORE_NEW_LINES);
 
     if (!$passwordFileLines) {
-      fail(
-        ErrorCode::UNEXPECTED_ERROR, 
-        "Could not load passwords file at '{$this->passwordsFilePath}'"
-      );
+      error_log("Could not load passwords file at '{$this->passwordsFilePath}'. ");
+      fail(ErrorCode::READING_PASSWORDS_FILE_ERROR);
     }
 
     foreach ($passwordFileLines as $entry) {

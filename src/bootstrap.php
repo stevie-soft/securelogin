@@ -19,6 +19,8 @@ require_once __DIR__ . "/controllers/Controller.php";
 require_once __DIR__ . "/controllers/HomeController.php";
 require_once __DIR__ . "/controllers/LoginController.php";
 require_once __DIR__ . "/controllers/ProfileController.php";
+require_once __DIR__ . "/controllers/LogoutController.php";
+require_once __DIR__ . "/controllers/ErrorController.php";
 
 /** Global Objects */
 require_once __DIR__ . "/globals.php";

@@ -1,9 +1,12 @@
 <?php
 
 class Controller {
+
+  protected string $path;
   protected array $handlers;
 
-  public function __construct() {
+  public function __construct(string $path) {
+    $this->path = $path;
     $this->handlers = [];
     $this->setup();
   }
@@ -20,5 +23,10 @@ class Controller {
     }
 
     $handler();
+  }
+
+  protected function fail(ErrorCode $errorCode) {
+    $path = "/{$this->path}?error={$errorCode->value}";
+    Router::redirect($path);
   }
 }
