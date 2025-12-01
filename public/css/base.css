@@ -5,6 +5,7 @@
   --font-family: "Advent Pro", sans-serif;
   --font-size: 2rem;
   --radius: 15px;
+  --error-color: #bf2e2e;
 }
 
 body {
@@ -22,4 +23,8 @@ body main {
   justify-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+.error {
+  color: var(--error-color);
 }

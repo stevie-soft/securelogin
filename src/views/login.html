@@ -14,12 +14,13 @@
       <form class="login" action="/login" method="POST">
         <h1>System X</h1>
         <span class="divider"></span>
-        <label for="username">Username</label>
+        <label for="username">E-Mail</label>
         <input name="username" type="email" class="field" required />
-        <label for="password">Password</label>
+        <label for="password">Jelszó</label>
         <input name="password" type="password" class="field" required />
+        <div id="errorBox" class="error"></div>
         <span class="spacing"></span>
-        <button class="primary" type="submit">Login</button>
+        <button class="primary" type="submit">Bejelentkezés</button>
       </form>
     </main>
     <script src="/js/login.js" type="module"></script>
