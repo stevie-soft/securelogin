@@ -1,7 +1,7 @@
 <?php
 
 $config = new Config($_ENV);
-$config->loadDotEnv("../.env");
+$config->loadDotEnv(__DIR__ . "/../.env");
 
 $db = new DatabaseManager(
   host: $config->getDatabaseHost(),
